@@ -13,20 +13,18 @@ if(isset($_GET['produit'])) {
     $result = file_get_contents($url);
 
     $json = json_decode($result, true);
-    //var_dump($json['nutriment']);
-    //uncom for check all product category
+                                                                // var_dump($json);     //uncom for check all product category
     foreach ($json['products'] as $row) {
-        var_dump($row['']); // test pour récuperer des données
+                                                                // var_dump($row['']); // test pour récuperer des données
         $productName = $row['product_name'];
         $brand = $row['brands'];
+
         if (isset($row['nutrition_grades']))
-        {
             $nut = $row['nutrition_grades'];
-        }else if(isset($row['nutrition_grade_fr']))
-        {
+        else if(isset($row['nutrition_grade_fr']))
             $nut = $row['nutrition_grade_fr'];
-        }
-        $energy =round( $row['nutriments']['energy']*0.239006);
+
+        $energy = round($row['nutriments']['energy']*0.239006);
         $image = $row['image_small_url'];
         $viewData = file_get_contents('reponse.html');
 
