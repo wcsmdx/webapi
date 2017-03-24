@@ -6,6 +6,8 @@
  * Time: 15:52
  */
 
+
+
 if(isset($_GET['produit'])) {
 
     $url = 'https://world.openfoodfacts.org/cgi/search.pl?search_terms=' . $_GET["produit"] . '&search_simple=1action=process&json=1';
@@ -15,6 +17,7 @@ if(isset($_GET['produit'])) {
     $json = json_decode($result, true);
                                                                 // var_dump($json);     //uncom for check all product category
     foreach ($json['products'] as $row) {
+
                                                                 // var_dump($row['']); // test pour récuperer des données
         $productName = $row['product_name'];
         $brand = $row['brands'];
@@ -28,11 +31,12 @@ if(isset($_GET['produit'])) {
         $image = $row['image_small_url'];
         $viewData = file_get_contents('reponse.html');
 
+        $nut = strtoupper($nut);
+
         echo str_replace(
             ['{productName}', '{brand}', '{image}', '{nut}', '{energy}'],
             [$productName, $brand, $image, $nut, $energy],
             $viewData);
     }
 }
-
 ?>
